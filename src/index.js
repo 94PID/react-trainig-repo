@@ -9,8 +9,13 @@ import thunkMiddleware from "redux-thunk";
 import monitorReducerEnhancer from "./enhancers/monitorReducer";
 import rootReducer from "./reducers";
 import { composeWithDevTools } from 'redux-devtools-extension'
+import mySaga from "./sagas/sagas";
+import createSagaMiddleware from 'redux-saga'
 
+const sagaMiddleware = createSagaMiddleware();
 const store = configureStore();
+
+sagaMiddleware.run(mySaga);
 
 ReactDOM.render(
     <Provider store={store}>
@@ -24,10 +29,10 @@ serviceWorker.unregister();
 
 function configureStore() {
     const middlewares = [loggerMiddleware, thunkMiddleware];
-    const middlewareEnhancer = applyMiddleware(...middlewares);
+    const middlewareEnhancer = applyMiddleware(...middlewares, sagaMiddleware);
 
     const enhancers = [middlewareEnhancer, monitorReducerEnhancer];
     const composedEnhancers = composeWithDevTools(...enhancers);
 
-    return createStore(rootReducer, undefined, composedEnhancers);
+    return createStore(rootReducer, composedEnhancers);
 }
