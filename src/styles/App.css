@@ -20,3 +20,20 @@
 .App-link {
   color: #09d3ac;
 }
+.navbar {
+  background-color: #563d7c !important;
+}
+
+.navbar-item {
+  font-size: 20px;
+  margin: 20px;
+  color: azure;
+}
+
+.navbar-item:hover {
+  color: whitesmoke;
+}
+
+.navbar-item.icon {
+  font-size: 30px;
+}
