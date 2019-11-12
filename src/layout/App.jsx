@@ -3,6 +3,7 @@ import '../styles/style.css';
 import {connect} from "react-redux";
 import {UseSize} from "../hooks/useSize";
 import {UseScroll} from "../hooks/useScroll";
+import {UseLoader} from "../hooks/useLoader";
 
 const App = (props) => {
 
@@ -11,9 +12,11 @@ const App = (props) => {
     return (
         <div className={"text-center"}>
             <h1>
-                <ScrollTo>
-                    <UseSize/>
-                </ScrollTo>
+                <UseLoader loading={true}>
+                    <ScrollTo>
+                        <UseSize/>
+                    </ScrollTo>
+                </UseLoader>
             </h1>
         </div>
     );
